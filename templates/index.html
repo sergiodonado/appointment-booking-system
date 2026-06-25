@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema de Citas</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+
+    <nav>
+        <button id="btn_login" onclick="mostrarSeccion('login')">Iniciar sesión</button>
+        <button id="btn_login_profesional" onclick="mostrarSeccion('login_profesional')">Soy profesional</button>
+        <button id="btn_registro" onclick="mostrarSeccion('registro')">Registrarse</button>
+        <button id="btn_disponibilidad" onclick="mostrarSeccion('disponibilidad')" style="display:none">Ver disponibilidad</button>
+        <button id="btn_mis_citas" onclick="mostrarSeccion('mis_citas')" style="display:none">Mis citas</button>
+        <button id="btn_crear_horario" onclick="mostrarSeccion('crear_horario')" style="display:none">Mi horario</button>
+        <button id="btn_citas_profesional" onclick="mostrarSeccion('citas_profesional')" style="display:none">Mis pacientes</button>
+        <button id="btn_cerrar_sesion" onclick="cerrarSesion()" style="display:none">Cerrar sesión</button>
+    </nav>
+
+    <!-- Sección Login -->
+    <div id="login" class="seccion">
+        <h2>Iniciar Sesión</h2>
+        <form id="formLogin">
+            <input type="number" id="login_dni" placeholder="DNI" required>
+            <input type="password" id="login_password" placeholder="Contraseña" required>
+            <button type="submit">Entrar</button>
+        </form>
+    </div>
+
+    <!-- Sección Registro -->
+    <div id="registro" class="seccion" style="display:none;">
+        <h2>Registro</h2>
+        <form id="formRegistro">
+            <input type="number" id="reg_dni" placeholder="DNI" required>
+            <input type="text" id="reg_name" placeholder="Nombre" required>
+            <input type="email" id="reg_email" placeholder="Email" required>
+            <input type="password" id="reg_password" placeholder="Contraseña" required>
+            <input type="text" id="reg_telefono" placeholder="Teléfono" required>
+            <button type="submit">Registrarse</button>
+        </form>
+    </div>
+
+    <!-- Sección Disponibilidad -->
+    <div id="disponibilidad" class="seccion" style="display:none;">
+        <h2>Consultar Disponibilidad</h2>
+        <input
+            type="text"
+            id="buscar_profesional"
+            list="profesionales">
+
+        <datalist id="profesionales">
+        </datalist>
+
+        <input
+            type="date"
+            id="fecha">
+
+        <button id="buscar_disponibilidad">
+            Buscar
+        </button>
+        <ul id="lista_slots"></ul>
+    </div>
+
+    <!-- Sección Mis Citas -->
+    <div id="mis_citas" class="seccion" style="display:none;">
+        <h2>Mis Citas</h2>
+
+        <ul id="lista_citas"></ul>
+    </div>
+
+    <div id="login_profesional" class="seccion" style="display:none;">
+        <h2>Acceso Profesional</h2>
+        <form id="formLoginProfesional">
+            <input type="number" id="pro_login_dni" placeholder="DNI" required>
+            <input type="password" id="pro_login_password" placeholder="Contraseña" required>
+            <button type="submit">Entrar</button>
+        </form>
+    </div>
+
+    <!-- Crear Horario -->
+    <div id="crear_horario" class="seccion" style="display:none;">
+        <h2>Mi Horario de Atención</h2>
+        <form id="formCrearHorario">
+            <select id="horario_dia">
+                <option value="">Selecciona el día</option>
+                <option value="lunes">Lunes</option>
+                <option value="martes">Martes</option>
+                <option value="miercoles">Miércoles</option>
+                <option value="jueves">Jueves</option>
+                <option value="viernes">Viernes</option>
+                <option value="sabado">Sábado</option>
+                <option value="domingo">Domingo</option>
+            </select>
+
+            <select id="horario_fin">
+                <option value="">Hora inicio</option>
+                <option value="06:00">06:00</option>
+                <option value="06:30">06:30</option>
+                <option value="07:00">07:00</option>
+                <option value="07:30">07:30</option>
+                <option value="08:00">08:00</option>
+                <option value="08:30">08:30</option>
+                <option value="09:00">09:00</option>
+                <option value="09:30">09:30</option>
+                <option value="10:00">10:00</option>
+                <option value="10:30">10:30</option>
+                <option value="11:00">11:00</option>
+                <option value="11:30">11:30</option>
+                <option value="12:00">12:00</option>
+                <option value="12:30">12:30</option>
+                <option value="13:00">13:00</option>
+                <option value="13:30">13:30</option>
+                <option value="14:00">14:00</option>
+                <option value="14:30">14:30</option>
+                <option value="15:00">15:00</option>
+                <option value="15:30">15:30</option>
+                <option value="16:00">16:00</option>
+                <option value="16:30">16:30</option>
+                <option value="17:00">17:00</option>
+                <option value="17:30">17:30</option>
+                <option value="18:00">18:00</option>
+            </select>
+
+            <select id="horario_fin">
+                <option value="">Hora fin</option>
+                <option value="06:00">06:00</option>
+                <option value="06:30">06:30</option>
+                <option value="07:00">07:00</option>
+                <option value="07:30">07:30</option>
+                <option value="08:00">08:00</option>
+                <option value="08:30">08:30</option>
+                <option value="09:00">09:00</option>
+                <option value="09:30">09:30</option>
+                <option value="10:00">10:00</option>
+                <option value="10:30">10:30</option>
+                <option value="11:00">11:00</option>
+                <option value="11:30">11:30</option>
+                <option value="12:00">12:00</option>
+                <option value="12:30">12:30</option>
+                <option value="13:00">13:00</option>
+                <option value="13:30">13:30</option>
+                <option value="14:00">14:00</option>
+                <option value="14:30">14:30</option>
+                <option value="15:00">15:00</option>
+                <option value="15:30">15:30</option>
+                <option value="16:00">16:00</option>
+                <option value="16:30">16:30</option>
+                <option value="17:00">17:00</option>
+                <option value="17:30">17:30</option>
+                <option value="18:00">18:00</option>
+            </select>
+
+            <button type="submit">Guardar horario</button>
+        </form>
+    </div>
+
+    <!-- Citas del Profesional -->
+    <div id="citas_profesional" class="seccion" style="display:none;">
+        <h2>Mis Pacientes</h2>
+        <ul id="lista_citas_profesional"></ul>
+    </div>
+
+    <button id="btn_cerrar_sesion" onclick="cerrarSesion()" style="display:none">Cerrar sesión</button>
+    
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
